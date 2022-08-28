@@ -5,12 +5,15 @@ import { PageTitle } from '@nx-tutorial/ui-header';
 
 import { Route, Routes, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { ApiResponse, API_URL } from '@nx-tutorial/api-interface';
 
 export function App() {
-  const [apiResponse, setApiResponse] = useState({ message: 'Loading...' });
+  const [apiResponse, setApiResponse] = useState<ApiResponse>({
+    message: 'Loading...',
+  });
 
   useEffect(() => {
-    fetch('/api')
+    fetch(API_URL)
       .then((r) => r.json())
       .then(setApiResponse);
   });
@@ -26,10 +29,8 @@ export function App() {
       <hr />
       <br />
       <div>
-        <>
-          <PageTitle />
-          {apiResponse.message}
-        </>
+        <PageTitle />
+        {apiResponse.message}
       </div>
       <div role="navigation">
         <ul>
