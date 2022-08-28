@@ -4,11 +4,12 @@
  */
 
 import * as express from 'express';
+import { ApiResponse, API_URL } from '@nx-tutorial/api-interface';
 
 const app = express();
 
-app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to api!' });
+app.get(API_URL, (req, res) => {
+  res.send({ message: 'Welcome to api!' } as ApiResponse);
 });
 
 const port = process.env.port || 3333;
