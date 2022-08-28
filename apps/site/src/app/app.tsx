@@ -4,11 +4,18 @@ import NxWelcome from './nx-welcome';
 import { PageTitle } from '@nx-tutorial/ui-header';
 
 import { Route, Routes, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 export function App() {
+  const [apiResponse, setApiResponse] = useState({ message: 'Loading...' });
+
+  useEffect(() => {
+    fetch('/api')
+      .then((r) => r.json())
+      .then(setApiResponse);
+  });
   return (
     <>
-      <PageTitle />
       <NxWelcome title="site" />
       <div />
 
@@ -18,6 +25,12 @@ export function App() {
       <br />
       <hr />
       <br />
+      <div>
+        <>
+          <PageTitle />
+          {apiResponse.message}
+        </>
+      </div>
       <div role="navigation">
         <ul>
           <li>
